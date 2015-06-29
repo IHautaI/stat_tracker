@@ -19,6 +19,7 @@
   <nav class="nav-bar"><span>Stat Tracker<span></nav>
 
   <form class="form">
+    {% csrf_token %}
     <span class="form-title">Enter Activity</span>
     <input type="text" name="activity" placeholder="activity" />
     <textarea placeholder="description"></textarea>
