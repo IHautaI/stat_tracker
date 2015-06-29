@@ -6,6 +6,8 @@
 *.pyc
 __pycache__/
 local_settings.py
+.envrc
+.direnv/*
 
 # Created by https://www.gitignore.io
 
