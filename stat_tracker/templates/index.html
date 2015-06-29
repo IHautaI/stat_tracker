@@ -19,13 +19,21 @@
   
   <nav class="nav-bar"><span>Stat Tracker<span></nav>
 
-  <form class="form">
+  <main class="main-content"></main>
+  
+  
+  <!--<form class="form">
     {% csrf_token %}
     <span class="form-title">Enter Activity</span>
     <input type="text" name="activity" placeholder="activity" />
     <textarea placeholder="description"></textarea>
     <button>submit</button>
-  </form>
+  </form>-->
+  
+  
+  <script type="text/html" id="login">
+    <a href="#/activities">Login</a>
+  </script>
   
   <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
   <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
@@ -33,6 +41,7 @@
 
   <script src="{% static 'js/utils/sorted-router.js' %}"></script>
   <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'js/controllers/login.js' %}"></script>
   
   <script src="{% static 'js/init.js' %}"></script>
 
