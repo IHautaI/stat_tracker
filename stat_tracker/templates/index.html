@@ -22,17 +22,22 @@
     <main class="main-content"></main>
     
     <script type="text/html" id="activities">
-      <form class="form">
+      <form class="activity-form">
         {% csrf_token %}
         <span class="form-title">What do you want to track?</span>
         <input type="text" name="activity" placeholder="ex) steps, stairs, etc." />
-        <textarea placeholder="description"></textarea>
-        <button>submit</button>
+        <textarea name="description" placeholder="description"></textarea>
+        <button>Add</button>
       </form>
     </script>
     
     <script type="text/html" id="login">
-      <a href="#/activities">Login</a>
+      <form class="login-form">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="username" />
+        <input type="text" name="password" placeholder="password" />
+        <button>Login</button>
+      </form>
     </script>
     
     <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>

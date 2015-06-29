@@ -1,4 +1,4 @@
-.form {
+form {
   margin: 5rem auto 0 auto;
   padding: 2rem;
   position: relative;
@@ -8,31 +8,32 @@
   background-color: #7FCCCA;
 }
 
-  .form-title {
+  form span {
     font-size: 2.5em;
     display: block;
     color: #FFFFFF;
     margin-bottom: 2rem;
   }
   
-  .form input,
-  .form textarea {
+  form input,
+  form textarea {
     width: 100%;
     border: 0;
     font-size: 1.5em;
     text-align: left;
     margin-bottom: 2rem;
+    outline: 0;
   }
   
-  .form input {
+  form input {
     height: 2rem;
   }
   
-  .form textarea {
+  form textarea {
     height: 4rem;
   }
   
-  .form button {
+  form button {
     border: 0;
     font-size: 2em;
     display: block;
@@ -42,8 +43,8 @@
     color: #FFFFFF;
   }
   
-  .form button:hover,
-  .form button:focus {
+  form button:hover,
+  form button:focus {
     background-color: #FFFFFF;
     color: #5A5D67;
   }

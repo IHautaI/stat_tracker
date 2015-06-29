@@ -1,5 +1,5 @@
-app.collection.activity = Backbone.Collection.extend({
-  model: Activity,
+app.collection = Backbone.Collection.extend({
+  model: app.model,
   
   url: '/api/activities'
 });

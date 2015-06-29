@@ -1,4 +1,4 @@
-app.model.activity = Backbone.Model.extend({
+app.model = Backbone.Model.extend({
   idAttribute: 'userId',
   
   urlRoot: '/api/activities'
