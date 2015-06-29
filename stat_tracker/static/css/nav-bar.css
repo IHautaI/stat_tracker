@@ -1,0 +1,17 @@
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  background-color: #7FCCCA;
+  color: #FFFFFF;
+  font-size: 4em;
+}
+
+.nav-bar span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
