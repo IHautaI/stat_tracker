@@ -4,8 +4,8 @@ from stats.models import Activity, Entry
 from users.models import Profile
 
 
-class EntrySerializer(serializers.Serializer):
-    timestamp = serializers.DateField()
+# class EntrySerializer(serializers.Serializer):
+#     timestamp = serializers.DateField()
 
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
@@ -20,9 +20,17 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
 class EditActivitySerializer(serializers.ModelSerializer):
     title = serializers.CharField()
     description = serializers.CharField()
-    entries = serializers.HyperlinkedIdentityField(view_name='stats')
-    entry_set = EntrySerializer(many=True)
+    stats = serializers.SerializerMethodField()
 
     class Meta:
         model = Activity
-        fields = ('title', 'description', 'entry_set',)
+        fields = ('title', 'description', 'stats')
+
+
+    def get_stats(self, obj):
+        dates = obj.entry_set.values('timestamp').distinct()
+        content = []
+        for date in dates:
+            content.append({'date': date, 'count': obj.entry_set.filter(timestamp=date).count()})
+
+        return content
