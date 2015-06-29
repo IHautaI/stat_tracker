@@ -1,11 +1,12 @@
 .nav-bar {
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   height: 4rem;
   background-color: #7FCCCA;
   color: #FFFFFF;
   font-size: 4em;
-  width: 100%;
 }
 
 .nav-bar span {

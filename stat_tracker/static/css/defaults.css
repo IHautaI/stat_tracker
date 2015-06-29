@@ -1,6 +1,7 @@
 body {
   font-size: 62.5%;
   background-color: #EBEBEC;
+  padding: 0 2rem;
 }
 
 body * {
