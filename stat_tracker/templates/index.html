@@ -2,49 +2,50 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Stats</title>
+    
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/defaults.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    
+  </head>
   
-  <title>Stats</title>
+  <body>
+    
+    <nav class="nav-bar"><span>Stat Tracker<span></nav>
   
-  <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/defaults.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <main class="main-content"></main>
+    
+    <script type="text/html" id="activities">
+      <form class="form">
+        {% csrf_token %}
+        <span class="form-title">Enter Activity</span>
+        <input type="text" name="activity" placeholder="activity" />
+        <textarea placeholder="description"></textarea>
+        <button>submit</button>
+      </form>
+    </script>
+    
+    <script type="text/html" id="login">
+      <a href="#/activities">Login</a>
+    </script>
+    
+    <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
+    <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
+    <script src="{% static 'js/vendors/backbone-min.js' %}"></script>
   
-</head>
-
-<body>
+    <script src="{% static 'js/utils/sorted-router.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/controllers/login.js' %}"></script>
+    <script src="{% static 'js/controllers/activites/activities.js' %}"></script>
+    
+    <script src="{% static 'js/init.js' %}"></script>
   
-  <nav class="nav-bar"><span>Stat Tracker<span></nav>
-
-  <main class="main-content"></main>
-  
-  
-  <!--<form class="form">
-    {% csrf_token %}
-    <span class="form-title">Enter Activity</span>
-    <input type="text" name="activity" placeholder="activity" />
-    <textarea placeholder="description"></textarea>
-    <button>submit</button>
-  </form>-->
-  
-  
-  <script type="text/html" id="login">
-    <a href="#/activities">Login</a>
-  </script>
-  
-  <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
-  <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
-  <script src="{% static 'js/vendors/backbone-min.js' %}"></script>
-
-  <script src="{% static 'js/utils/sorted-router.js' %}"></script>
-  <script src="{% static 'js/app.js' %}"></script>
-  <script src="{% static 'js/controllers/login.js' %}"></script>
-  
-  <script src="{% static 'js/init.js' %}"></script>
-
-</body>
+  </body>
 
 </html>
