@@ -26,11 +26,12 @@ class EditActivitySerializer(serializers.ModelSerializer):
         model = Activity
         fields = ('title', 'description', 'stats')
 
-
     def get_stats(self, obj):
         dates = obj.entry_set.values('timestamp').distinct()
         content = []
         for date in dates:
-            content.append({'date': date, 'count': obj.entry_set.filter(timestamp=date).count()})
+            content.append({'date': date, 'count': \
+                            obj.entry_set.filter(timestamp=date).count()
+                            })
 
         return content
