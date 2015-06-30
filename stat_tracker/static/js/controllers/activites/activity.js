@@ -5,7 +5,7 @@ app.router.route('activities/:id', function (id) {
   $('.main-content').html(activityHTML);
   
   $.ajax({
-    url: '/api/activites/' + id,
+    url: '/api/activities/' + parseInt(id) + '/',
     method: 'GET',
     contentType: 'application/json'
   }).done(function (data) {

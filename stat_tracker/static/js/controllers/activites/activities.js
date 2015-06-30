@@ -9,8 +9,9 @@ app.router.route('activities', function () {
     method: 'GET',
     contentType: 'application/json',
   }).done(function (data) {
+    console.log(data);
     data.map(function (item) {
-      $('.list-activities').append('<li>' + item.title + ' ' + item.description + '</li>');
+      $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' ' + item.description + '</li></a>');
     });
   }).fail(function () {
     console.log(arguments);
