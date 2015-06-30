@@ -9,8 +9,9 @@ app.router.route('activities', function () {
     method: 'GET',
     contentType: 'application/json',
   }).done(function (data) {
-    $('.list-activites').text(data[0].title);
-    console.log(data);
+    data.map(function (item) {
+      $('.list-activities').append('<li>' + item.title + ' ' + item.description + '</li>');
+    });
   }).fail(function () {
     console.log(arguments);
   });
@@ -61,5 +62,21 @@ app.router.route('activities', function () {
     }).fail(function () {
       console.log(arguments);
     });
+    
+    $.ajax({
+      url: '/api/activities/',
+      method: 'GET',
+      contentType: 'application/json',
+    }).done(function (data) {
+      $('.list-activities li').remove();
+      data.map(function (item) {
+        $('.list-activities').append('<li>' + item.title + ' ' + item.description + '</li>');
+      });
+    }).fail(function () {
+      console.log(arguments);
+    });
+    
+    $('input[name="activity"]').val(''),
+    $('textarea[name="description"]').val('')
   });
 });

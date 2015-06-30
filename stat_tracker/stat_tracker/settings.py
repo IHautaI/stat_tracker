@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'api',
     'django_extensions',
     'rest_framework',
-    'debug_toolbar',
+    #'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
