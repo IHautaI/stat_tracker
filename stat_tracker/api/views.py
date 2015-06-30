@@ -30,22 +30,6 @@ class ActivityViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(profile=self.request.user.profile)
 
-    # def get_serializer(self, *args, **kwargs):
-    #     if self.request.method in ['GET', 'POST', 'DELETE']:
-    #         return super().get_serializer(*args, **kwargs)
-    #
-    #     if self.request.method in ['PUT']:
-    #         serializer_class = EditActivitySerializer
-    #         kwargs['context'] = self.get_serializer_context()
-    #         return serializer_class(*args, **kwargs)
-
-    # def perform_update(self, serializer):
-    #     stats = self.request.data['stats']
-    #     activity = serializer.save()
-    #
-    #     serializer = EntrySerializer(stats)
-    #     activity.entry_set.create()
-
 
 @api_view(['PUT', 'POST'])
 @login_required
