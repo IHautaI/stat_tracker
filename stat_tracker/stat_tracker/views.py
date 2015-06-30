@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 
@@ -25,7 +25,7 @@ class IndexView(TemplateView):
         if user is not None:
             login(request, user)
             response.status_code = 200
-            return response
+            return redirect('#/answers')
         else:
             response.status_code = 404
             return response
