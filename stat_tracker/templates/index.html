@@ -5,22 +5,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <title>Stats</title>
-    
+
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/defaults.css' %}" />
     <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    
+
   </head>
-  
+
   <body>
-    
+
     <nav class="nav-bar"><span>Stat Tracker<span></nav>
-  
+
     <main class="main-content"></main>
-    
+
     <script type="text/html" id="activities">
       <form class="activity-form">
         {% csrf_token %}
@@ -30,12 +30,12 @@
         <button>Add</button>
       </form>
     </script>
-    
+
     <script type="text/html" id="login">
       {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
         {% endif %}
-        
+
         {% if next %}
             {% if user.is_authenticated %}
             <p>Your account doesn't have access to this page. To proceed,
@@ -44,8 +44,8 @@
         {#    <p>Please login to see this page.</p>#}
             {% endif %}
         {% endif %}
-        
-        <form method="post" action="{% url 'accounts:login' %}" align="center">
+
+        <form method="post" action="" align="center">
         {% csrf_token %}
             <table align="center">
             <tr>
@@ -59,24 +59,23 @@
             </table>
             <br />
             <input type="submit" value="login"/>
-            <input type="hidden" name="next" value="{{ next }}" />
         </form>
     </script>
-    
+
     <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
     <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
     <script src="{% static 'js/vendors/backbone-min.js' %}"></script>
-  
+
     <script src="{% static 'js/utils/sorted-router.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/controllers/login.js' %}"></script>
     <script src="{% static 'js/controllers/activites/activities.js' %}"></script>
-    
+
     <script src="{% static 'js/models/activity.js' %}"></script>
     <script src="{% static 'js/models/activity-collection.js' %}"></script>
-    
+
     <script src="{% static 'js/init.js' %}"></script>
-  
+
   </body>
 
 </html>
