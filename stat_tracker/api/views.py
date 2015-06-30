@@ -48,6 +48,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['PUT', 'POST'])
+@login_required
 def stats(request, pk):
     activity = Activity.objects.get(pk=pk)
     if activity.profile == request.user.profile:
@@ -62,15 +63,23 @@ def stats(request, pk):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         elif request.method == 'PUT':
-            date = request.PUT.get('date')
-            count = request.PUT.get('count')
-            queryset = activity.stats.filter(date=date)
-            if queryset:
-                activity = queryset[0]
-                activity.count = count
-                activity.save()
-                return Response({"date":date, "count":count}, status=status.HTTP_200_OK)
+
+            serializer = EntrySerializer(request.data)
+
+            if serializer.is_valid():
+                date = serializer.data['date']
+                queryset = activity.stats.filter(date=date)
+
+                if queryset.exists():
+                    activity = queryset[0]
+                    activity.count = serializer.data['count']
+                    activity.save()
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -83,7 +92,7 @@ def stats(request, pk):
 def rm_stats(request, pk):
     activity = Activity.objects.get(pk=pk)
     if activity.profile == request.user.profile:
-        date = request.DELETE.get('date')
+        date = request.data.get('date')
         activity.entry_set.filter(date=date).delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
