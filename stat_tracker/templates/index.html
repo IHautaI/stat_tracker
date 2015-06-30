@@ -20,17 +20,7 @@
     <nav class="nav-bar"><span>Stat Tracker<span></nav>
 
     <main class="main-content"></main>
-
-    <script type="text/html" id="activities">
-      <form class="activity-form">
-        {% csrf_token %}
-        <span class="form-title">What do you want to track?</span>
-        <input type="text" name="activity" placeholder="ex) steps, stairs, etc." />
-        <textarea name="description" placeholder="description"></textarea>
-        <button>Add</button>
-      </form>
-    </script>
-
+    
     <script type="text/html" id="login">
       {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
@@ -62,6 +52,24 @@
         </form>
     </script>
 
+    <script type="text/html" id="activities">
+      <form class="activity-form">
+        {% csrf_token %}
+        <span class="form-title">What do you want to track?</span>
+        <input type="text" name="activity" placeholder="ex) steps, stairs, etc." />
+        <textarea name="description" placeholder="description"></textarea>
+        <button>Add</button>
+      </form>
+      
+      <ul class="list-activites">
+        
+      </ul>
+    </script>
+    
+    <script type="text/html" id="activity">
+      <div class="test"></div>
+    </script>
+
     <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
     <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
     <script src="{% static 'js/vendors/backbone-min.js' %}"></script>
@@ -70,6 +78,7 @@
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/controllers/login.js' %}"></script>
     <script src="{% static 'js/controllers/activites/activities.js' %}"></script>
+    <script src="{% static 'js/controllers/activites/activity.js' %}"></script>
 
     <script src="{% static 'js/models/activity.js' %}"></script>
     <script src="{% static 'js/models/activity-collection.js' %}"></script>

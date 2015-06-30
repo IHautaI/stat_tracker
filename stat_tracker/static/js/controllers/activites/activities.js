@@ -1,18 +1,29 @@
 app.router.route('activities', function () {
   
-  var loginHTML = $('#activities').html();
+  var activitiesHTML = $('#activities').html();
   
-  $('.main-content').html(loginHTML);
+  $('.main-content').html(activitiesHTML);
   
   $('.main-content').on('click', '.activity-form button', function (e) {
     e.preventDefault();
     
     
-    var data = {
+    var activity = {
       title: $('input[name="activity"]').val(),
       description: $('textarea[name="description"]').val()
     };
     
-    console.log(data);
+    console.log(activity);
+    
+    $.ajax({
+      url: '/api/activities/',
+      method: 'POST',
+      data: JSON.stringify(activity),
+      contentType: 'application/json; charset=utf-8'
+    }).done(function (data) {
+      console.log('success!');
+    }).fail(function () {
+      console.log(arguments);
+    });
   });
 });
