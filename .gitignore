@@ -72,3 +72,5 @@ target/
 
 *.sqlite3
 
+# Other
+.DS_Store

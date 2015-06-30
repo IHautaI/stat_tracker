@@ -70,8 +70,12 @@
       <form class="activity-form">
         {% csrf_token %}
         <span class="activity-title"></span>
-        <input type="text" name="date" placeholder="Date: YYYY-MM-DD" />
-        <input type="text" name="count" placeholder="Activity Count" />
+        <input type="text" name="date" placeholder="Date: YYYY-MM-DD"
+          required
+          pattern="^(19|20)\d\d([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$">
+        <input type="text" name="count" placeholder="Activity Count"
+          required
+          pattern="/^\d+$/">
         <button>Add</button>
       </form>
     </script>
@@ -79,6 +83,7 @@
     <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
     <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
     <script src="{% static 'js/vendors/backbone-min.js' %}"></script>
+    <script src="{% static 'js/vendors/parsley.min.js' %}"></script>
 
     <script src="{% static 'js/utils/sorted-router.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>

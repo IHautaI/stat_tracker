@@ -15,7 +15,7 @@ app.router.route('activities/:id', function (id) {
     console.log(arguments);
   });
   
-  $('.activity-form').on('click', 'button', function (e) {
+  $('.activity-form').on('submit', function (e) {
     e.preventDefault();
     
     // using jQuery
