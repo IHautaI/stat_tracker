@@ -11,7 +11,7 @@ app.router.route('activities', function () {
   }).done(function (data) {
     console.log(data);
     data.map(function (item) {
-      $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' ' + item.description + '</li></a>');
+      $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' : ' + item.description + '</li></a>');
     });
   }).fail(function () {
     console.log(arguments);
