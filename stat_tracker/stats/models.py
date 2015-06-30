@@ -10,5 +10,6 @@ class Activity(models.Model):
 
 
 class Entry(models.Model):
-    timestamp = models.DateField()
-    activity = models.ForeignKey('Activity', null=True)
+    date = models.DateField()
+    count = models.IntegerField(default=0)
+    activity = models.ForeignKey('Activity', null=True, related_name='stats')
