@@ -46,6 +46,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
     #     serializer = EntrySerializer(stats)
     #     activity.entry_set.create()
 
+
 @api_view(['PUT', 'POST'])
 def stats(request, pk):
     activity = Activity.objects.get(pk=pk)
@@ -71,8 +72,8 @@ def stats(request, pk):
                 activity = queryset[0]
                 activity.count = count
                 activity.save()
-                return Response(activity, status=status.HTTP_200_OK)
-
+                return Response({"date":date, "count":count}, status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -85,8 +86,8 @@ def stats(request, pk):
 def rm_stats(request, pk):
     activity = Activity.objects.get(pk=pk)
     if activity.profile == request.user.profile:
-        timestamp = request.DELETE.get('date')
-        activity.entry_set.filter(timestamp=timestamp).delete()
+        date = request.DELETE.get('date')
+        activity.entry_set.filter(date=date).delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
