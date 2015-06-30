@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.utils.decorators import method_decorator
@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
 
 
-from api.serializers import ActivitySerializer, EditActivitySerializer
+from api.serializers import ActivitySerializer, EditActivitySerializer, EntrySerializer
 from stats.models import Activity, Entry
 from users.models import Profile
 
@@ -46,33 +46,31 @@ class ActivityViewSet(viewsets.ModelViewSet):
     #     serializer = EntrySerializer(stats)
     #     activity.entry_set.create()
 
+
 @api_view(['PUT', 'POST'])
 def stats(request, pk):
     activity = Activity.objects.get(pk=pk)
     if activity.profile == request.user.profile:
 
         if request.method == 'POST':
+            serializer = EntrySerializer(data=request.data)
 
-            date = request.POST.get('date')
-            count = request.POST.get('count')
-            activity.entry_set.create(date=date, count=count)
+            if serializer.is_valid():
+                serializer.save(activity=activity)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-            content = { 'date': date,
-                        'count': count
-            }
-
-            return Response(content, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         elif request.method == 'PUT':
             date = request.PUT.get('date')
             count = request.PUT.get('count')
-            queryset = activity.entry_set.filter(date=date)
+            queryset = activity.stats.filter(date=date)
             if queryset:
                 activity = queryset[0]
                 activity.count = count
                 activity.save()
-                return Response(activity, status=status.HTTP_200_OK)
-
+                return Response({"date":date, "count":count}, status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -85,8 +83,8 @@ def stats(request, pk):
 def rm_stats(request, pk):
     activity = Activity.objects.get(pk=pk)
     if activity.profile == request.user.profile:
-        timestamp = request.DELETE.get('date')
-        activity.entry_set.filter(timestamp=timestamp).delete()
+        date = request.DELETE.get('date')
+        activity.entry_set.filter(date=date).delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 

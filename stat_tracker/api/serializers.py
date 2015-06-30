@@ -12,6 +12,11 @@ class EntrySerializer(serializers.Serializer):
         model = Entry
         fields = ('date', 'count')
 
+    def create(self, validated_data):
+        entry = Entry.objects.create(**validated_data)
+        return entry
+        
+
 class ActivitySerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(read_only=True,view_name='activities-detail')
     id = serializers.IntegerField(read_only=True)
