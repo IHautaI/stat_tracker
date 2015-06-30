@@ -72,10 +72,10 @@
         {% csrf_token %}
         <span>Add Your Stats for </span>
         <span class="activity-title"></span>
-        <input type="text" name="date" placeholder="Date: YYYY-MM-DD"
+        <input type="text" name="date" placeholder="YYYY-MM-DD"
           required
           pattern="^(19|20)\d\d([-])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$">
-        <input type="number" name="count" placeholder="Stat Count"
+        <input type="number" name="count" placeholder="Stat"
           required>
         <button>Add</button>
       </form>

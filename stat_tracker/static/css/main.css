@@ -65,3 +65,13 @@ a:hover {
     background-color: #FFFFFF;
     color: #5A5D67;
   }
+  
+.activity-form input[name="date"] {
+  width: 45%;
+  text-align: center;
+}
+
+.activity-form input[name="count"] {
+  width: 45%;
+  text-align: center;
+}
