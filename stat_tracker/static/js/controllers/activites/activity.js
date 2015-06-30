@@ -1,5 +1,5 @@
 app.router.route('activities/:id', function (id) {
-  
+
   var activityHTML = $('#activity').html();
   
   $('.main-content').html(activityHTML);
@@ -9,8 +9,18 @@ app.router.route('activities/:id', function (id) {
     method: 'GET',
     contentType: 'application/json'
   }).done(function (data) {
+    var dates = [];
+    var counts = []; 
+    
     $('.activity-title').text(data.title);
-    console.log(data.stats);
+    data.stats.map(function (stats) {
+      dates.push(stats.date);
+      counts.push(stats.count);
+    })
+    dates.unshift('dates');
+    counts.unshift('stats');
+    
+    app.render.stats(dates, counts);
   }).fail(function (data) {
     console.log(arguments);
   });
@@ -61,6 +71,34 @@ app.router.route('activities/:id', function (id) {
     }).fail(function () {
       console.log(arguments);
     });
+    
+    $('input[name="date"]').val('');
+    $('input[name="count"]').val('');
+    
+    $.ajax({
+      url: '/api/activities/' + parseInt(id) + '/',
+      method: 'GET',
+      contentType: 'application/json'
+    }).done(function (data) {
+      var dates = [];
+      var counts = [];
+      
+      $('.activity-title').text(data.title);
+      data.stats.map(function (stats) {
+        dates.push(stats.date);
+        counts.push(stats.count);
+      })
+      dates.unshift('dates');
+      counts.unshift('stats');
+      
+      $('.visual *').remove();
+      
+      app.render.stats(dates, counts);
+    }).fail(function (data) {
+      console.log(arguments);
+    });
+    
+    
     
   });
 
