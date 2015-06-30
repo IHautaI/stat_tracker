@@ -1,6 +1,6 @@
 form {
-  margin: 5rem auto 0 auto;
-  padding: 2rem;
+  margin: 0 auto;
+  padding: 1rem;
   position: relative;
   display: block;
   width: 20rem;
@@ -8,11 +8,28 @@ form {
   background-color: #7FCCCA;
 }
 
+a {
+  position: relative;
+  display: block;
+  width: 20rem;
+  margin: 0.5rem auto;
+  text-align: center;
+  background-color: #7FCCCA;
+  color: #FFFFFF;
+  padding: 0.5rem;
+  text-decoration: none;
+  font-size: 2em;
+}
+
+a:hover {
+  background-color: #5A5D67;
+}
+
   form span {
     font-size: 2.5em;
     display: block;
     color: #FFFFFF;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   
   form input,
@@ -21,7 +38,7 @@ form {
     border: 0;
     font-size: 1.5em;
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     outline: 0;
   }
   
@@ -35,7 +52,7 @@ form {
   
   form button {
     border: 0;
-    font-size: 2em;
+    font-size: 1.5em;
     display: block;
     padding: 0.5rem 2rem;
     margin: 0 auto;
