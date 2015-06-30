@@ -9,9 +9,59 @@ app.router.route('activities/:id', function (id) {
     method: 'GET',
     contentType: 'application/json'
   }).done(function (data) {
+    $('.activity-title').text(data.title);
     console.log(data);
   }).fail(function (data) {
     console.log(arguments);
+  });
+  
+  $('.activity-form').on('click', 'button', function (e) {
+    e.preventDefault();
+    
+    // using jQuery
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken'); 
+    
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+  
+    var activityData = {
+      date: $('input[name="date"]').val(),
+      count: $('input[name="count"]').val()
+    }
+    
+    $.ajax({
+      beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      },
+      url: '/api/activities/' + parseInt(id) + '/stats/',
+      method: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify(activity)
+    }).done(function (data) {
+      console.log('success');
+    }).fail(function () {
+      console.log(arguments);
+    });
+    
   });
 
 });

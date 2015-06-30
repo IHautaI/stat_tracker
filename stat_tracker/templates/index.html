@@ -67,7 +67,13 @@
     </script>
     
     <script type="text/html" id="activity">
-      <div class="test"></div>
+      <form class="activity-form">
+        {% csrf_token %}
+        <span class="activity-title"></span>
+        <input type="text" name="date" placeholder="Date: YYYY-MM-DD" />
+        <input type="text" name="count" placeholder="Activity Count" />
+        <button>Add</button>
+      </form>
     </script>
 
     <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
