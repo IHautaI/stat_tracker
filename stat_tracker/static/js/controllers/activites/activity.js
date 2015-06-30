@@ -10,6 +10,7 @@ app.router.route('activities/:id', function (id) {
     contentType: 'application/json'
   }).done(function (data) {
     $('.activity-title').text(data.title);
+    console.log(data.stats);
   }).fail(function (data) {
     console.log(arguments);
   });
@@ -54,7 +55,7 @@ app.router.route('activities/:id', function (id) {
       url: '/api/activities/' + parseInt(id) + '/stats/',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify(activity)
+      data: JSON.stringify(activityData)
     }).done(function (data) {
       console.log(data);
     }).fail(function () {
