@@ -9,15 +9,17 @@ app.router.route('activities', function () {
     method: 'GET',
     contentType: 'application/json',
   }).done(function (data) {
+    console.log(data);
     data.map(function (item) {
-      $('.list-activities').append('<li>' + item.title + ' ' + item.description + '</li>');
+      $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' ' + item.description + '</li></a>');
     });
   }).fail(function () {
     console.log(arguments);
   });
   
-  $('.main-content').on('click', '.activity-form button', function (e) {
+  $('.activity-form').on('click', 'button', function (e) {
     e.preventDefault();
+    console.log('click');
     
     // using jQuery
     function getCookie(name) {
@@ -68,9 +70,9 @@ app.router.route('activities', function () {
       method: 'GET',
       contentType: 'application/json',
     }).done(function (data) {
-      $('.list-activities li').remove();
+      $('.list-activities a').remove();
       data.map(function (item) {
-        $('.list-activities').append('<li>' + item.title + ' ' + item.description + '</li>');
+        $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' ' + item.description + '</li></a>');
       });
     }).fail(function () {
       console.log(arguments);
