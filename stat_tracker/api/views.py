@@ -53,25 +53,25 @@ def stats(request, pk):
 
         if request.method == 'POST':
 
-            timestamp = request.POST.get('date')
-            activity.entry_set.create(timestamp=timestamp)
+            date = request.POST.get('date')
+            count = request.POST.get('count')
+            activity.entry_set.create(date=date, count=count)
 
-            content = { 'date': timestamp,
-                        'count': activity.entry_set.filter(\
-                                  timestamp=timestamp).count()
+            content = { 'date': date,
+                        'count': count
             }
 
             return Response(content, status=status.HTTP_201_CREATED)
 
         elif request.method == 'PUT':
-            timestamp = request.PUT.get('date')
-            number = request.PUT.get('count')
-            activity.entry_set.filter(timestamp=timestamp).delete()
-
-            for _ in range(number):
-                activity.entry_set.create(timestamp=timestamp)
-
-            return Response(activity.entry_set.filter(timestamp=timestamp), status=status.HTTP_200_OK)
+            date = request.PUT.get('date')
+            count = request.PUT.get('count')
+            queryset = activity.entry_set.filter(date=date)
+            if queryset:
+                activity = queryset[0]
+                activity.count = count
+                activity.save()
+                return Response(activity, status=status.HTTP_200_OK)
 
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
