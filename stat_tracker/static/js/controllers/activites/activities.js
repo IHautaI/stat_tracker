@@ -16,8 +16,9 @@ app.router.route('activities', function () {
     console.log(arguments);
   });
   
-  $('.main-content').on('click', '.activity-form button', function (e) {
+  $('.activity-form').on('click', 'button', function (e) {
     e.preventDefault();
+    console.log('click');
     
     // using jQuery
     function getCookie(name) {
