@@ -14,7 +14,7 @@ class EntrySerializer(serializers.Serializer):
 
 class ActivitySerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(read_only=True,view_name='activities-detail')
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     title = serializers.CharField()
     description = serializers.CharField()
 
