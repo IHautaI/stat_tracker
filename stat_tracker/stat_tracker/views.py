@@ -25,7 +25,7 @@ class IndexView(TemplateView):
         if user is not None:
             login(request, user)
             response.status_code = 200
-            return redirect('#/answers')
+            return redirect('#/activities')
         else:
             response.status_code = 404
             return response
