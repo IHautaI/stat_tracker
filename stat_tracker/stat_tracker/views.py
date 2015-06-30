@@ -28,4 +28,4 @@ class IndexView(TemplateView):
             return redirect('#/activities')
         else:
             response.status_code = 404
-            return response
+            return redirect('#/login-error')

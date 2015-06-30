@@ -9,13 +9,18 @@ from users.models import Profile
 
 
 class ActivitySerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='activities-detail')
+    url = serializers.HyperlinkedIdentityField(read_only=True,view_name='activities-detail')
     title = serializers.CharField()
     description = serializers.CharField()
 
     class Meta:
         model = Activity
         fields = ('url', 'title', 'description',)
+
+
+    def create(self, validated_data):
+        activity = Activity.objects.create(**validated_data)
+        return activity
 
 
 class EditActivitySerializer(serializers.ModelSerializer):
