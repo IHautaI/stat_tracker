@@ -4,16 +4,23 @@ app.router.route('activities', function () {
   
   $('.main-content').html(activitiesHTML);
   
+  $.ajax({
+    url: '/api/activities/',
+    method: 'GET',
+    contentType: 'application/json',
+  }).done(function (data) {
+    $('.list-activites').text(data[0].title);
+  }).fail(function () {
+    console.log(arguments);
+  });
+  
   $('.main-content').on('click', '.activity-form button', function (e) {
     e.preventDefault();
-    
     
     var activity = {
       title: $('input[name="activity"]').val(),
       description: $('textarea[name="description"]').val()
     };
-    
-    console.log(activity);
     
     $.ajax({
       url: '/api/activities/',
