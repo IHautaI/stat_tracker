@@ -29,7 +29,6 @@ class ActivityViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(profile=self.request.user.profile)
 
-
 @api_view(['PUT', 'POST'])
 def stats(request, pk):
     activity = Activity.objects.get(pk=pk)
