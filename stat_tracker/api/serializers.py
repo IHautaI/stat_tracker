@@ -8,7 +8,8 @@ from users.models import Profile
 #     timestamp = serializers.DateField()
 
 
-class ActivitySerializer(serializers.HyperlinkedModelSerializer):
+class ActivitySerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='activities-detail')
     title = serializers.CharField()
     description = serializers.CharField()
 
