@@ -67,38 +67,34 @@ app.router.route('activities/:id', function (id) {
       contentType: 'application/json',
       data: JSON.stringify(activityData)
     }).done(function (data) {
-      console.log(data);
+      $.ajax({
+        url: '/api/activities/' + parseInt(id) + '/',
+        method: 'GET',
+        contentType: 'application/json'
+      }).done(function (data) {
+        var dates = [];
+        var counts = [];
+        
+        $('.activity-title').text(data.title);
+        data.stats.map(function (stats) {
+          dates.push(stats.date);
+          counts.push(stats.count);
+        })
+        dates.unshift('dates');
+        counts.unshift('stats');
+        
+        $('.visual *').remove();
+        
+        app.render.stats(dates, counts);
+      }).fail(function (data) {
+        console.log(arguments);
+      });
     }).fail(function () {
       console.log(arguments);
     });
     
     $('input[name="date"]').val('');
     $('input[name="count"]').val('');
-    
-    $.ajax({
-      url: '/api/activities/' + parseInt(id) + '/',
-      method: 'GET',
-      contentType: 'application/json'
-    }).done(function (data) {
-      var dates = [];
-      var counts = [];
-      
-      $('.activity-title').text(data.title);
-      data.stats.map(function (stats) {
-        dates.push(stats.date);
-        counts.push(stats.count);
-      })
-      dates.unshift('dates');
-      counts.unshift('stats');
-      
-      $('.visual *').remove();
-      
-      app.render.stats(dates, counts);
-    }).fail(function (data) {
-      console.log(arguments);
-    });
-    
-    
     
   });
 
