@@ -48,6 +48,7 @@ def register(request):
             if not User.objects.filter(username=form.username).exists():
                 user = User.objects.create(**inp)
                 Profile.objects.create(user=user)
+                return redirect('#/activities')
             else:
                 response = HttpResponse('Username already in use.')
                 response.status_code = 400
