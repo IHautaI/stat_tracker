@@ -59,20 +59,18 @@ app.router.route('activities', function () {
       method: 'POST',
       data: JSON.stringify(activity),
       contentType: 'application/json; charset=utf-8'
-    }).done(function (data) {
-      console.log('success!');
-    }).fail(function () {
-      console.log(arguments);
-    });
-    
-    $.ajax({
-      url: '/api/activities/',
-      method: 'GET',
-      contentType: 'application/json',
-    }).done(function (data) {
-      $('.list-activities *').remove();
-      data.map(function (item) {
-        $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' : ' + item.description + '</li></a>');
+    }).done(function () {
+      $.ajax({
+        url: '/api/activities/',
+        method: 'GET',
+        contentType: 'application/json',
+      }).done(function (data) {
+        $('.list-activities *').remove();
+        data.map(function (item) {
+          $('.list-activities').append('<a href="#/activities/' + item.id + '"><li>' + item.title + ' : ' + item.description + '</li></a>');
+        });
+      }).fail(function () {
+        console.log(arguments);
       });
     }).fail(function () {
       console.log(arguments);
