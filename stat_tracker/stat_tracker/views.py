@@ -35,7 +35,7 @@ class IndexView(TemplateView):
 
 
 def register(request):
-    respones = HttpResponse()
+    response = HttpResponse()
 
     if request.method == 'POST':
         form = RegisterForm(request.data)
