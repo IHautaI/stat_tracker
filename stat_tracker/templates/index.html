@@ -61,9 +61,7 @@
         <textarea name="description" placeholder="description"></textarea>
         <button>Add</button>
       </form>
-      
       <ul class="list-activities">
-        
       </ul>
     </script>
     
@@ -82,6 +80,15 @@
       
       <div class="visual"></div>
     </script>
+    
+    <script type="text/html" id="new-user">
+      <form class="new-user">
+        {% csrf_token %}
+        <span>New User</span>
+        {{ registration_form }}
+        <button>Register</button>
+      </form>
+    </script>
 
     <script src="{% static 'js/vendors/jquery-1.11.3.min.js' %}"></script>
     <script src="{% static 'js/vendors/underscore-min.js' %}"></script>
@@ -94,6 +101,7 @@
     <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/utils/render.js' %}"></script>
     <script src="{% static 'js/controllers/login.js' %}"></script>
+    <script src="{% static 'js/controllers/register.js' %}"></script>
     <script src="{% static 'js/controllers/activites/activities.js' %}"></script>
     <script src="{% static 'js/controllers/activites/activity.js' %}"></script>
 
