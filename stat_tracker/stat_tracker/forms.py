@@ -7,3 +7,13 @@ class LoginForm(forms.Form):
 
     class Meta:
         fields = ('username', 'password',)
+
+
+class RegistrationForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField()
+    description = forms.CharField()
+
+    class Meta:
+        fields = ('username', 'password', 'email', 'description',)
